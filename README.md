@@ -3,6 +3,7 @@
 📙 Este é um simples catálogo de livros em Python que permite aos usuários cadastrar livros, verificar a disponibilidade de exemplares e pesquisar livros por título ou autor. Projeto desenvolvido para o programa Match.
 
 💠 Funcionalidades:
+
 🔸 Cadastro de Livros: Os usuários podem cadastrar livros fornecendo o título, autor e número de exemplares disponíveis.
 
 🔸 Validação de Disponibilidade: O programa verifica se o número de exemplares disponíveis é válido e maior que zero.
