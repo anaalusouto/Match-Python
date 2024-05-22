@@ -10,7 +10,10 @@
 
 🔸 Pesquisa de Livros: Os usuários podem pesquisar livros por título ou autor, exibindo os resultados da pesquisa e a disponibilidade de cada livro.
 
-Desenvolvedores:
+💻 Desenvolvedores:
+
 👩🏻 Luiza Souto
+
 🧔🏽‍♀️ Hugo Martins
+
 🧔🏻‍♂️ Victor Hugo Chaves
