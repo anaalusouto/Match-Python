@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 class Livro:
     def __init__(self, titulo, autor, exemplares):
         self.titulo = titulo
@@ -10,17 +13,17 @@ class Catalogo:
 
     def cadastrar_livro(self, livro):
         self.livros.append(livro)
-        print("Livro cadastrado com sucesso!")
+        messagebox.showinfo("Sucesso", "Livro cadastrado com sucesso!")
 
     def validar_disponibilidade(self, titulo):
         for livro in self.livros:
             if livro.titulo == titulo:
                 if livro.exemplares > 0:
-                    print("O livro está disponível.")
+                    messagebox.showinfo("Disponibilidade", "O livro está disponível.")
                 else:
-                    print("O livro está indisponível.")
+                    messagebox.showinfo("Disponibilidade", "O livro está indisponível.")
                 return
-        print("Livro não encontrado.")
+        messagebox.showinfo("Erro", "Livro não encontrado.")
 
     def pesquisar_livro(self, chave):
         resultados = []
@@ -28,47 +31,66 @@ class Catalogo:
             if chave.lower() in livro.titulo.lower() or chave.lower() in livro.autor.lower():
                 resultados.append(livro)
         if resultados:
+            mensagem = ""
             for livro in resultados:
-                print(f"Título: {livro.titulo}, Autor: {livro.autor}, Exemplares disponíveis: {livro.exemplares}")
+                mensagem += f"Título: {livro.titulo}, Autor: {livro.autor}, Exemplares disponíveis: {livro.exemplares}\n"
+            messagebox.showinfo("Resultados", mensagem)
         else:
-            print("Nenhum livro encontrado com esse título ou autor.")
+            messagebox.showinfo("Resultados", "Nenhum livro encontrado com esse título ou autor.")
 
 catalogo = Catalogo()
 
-def exibir_menu():
-    print("MENU:")
-    print("1. Cadastrar livro")
-    print("2. Validar disponibilidade")
-    print("3. Pesquisar livro")
-    print("4. Sair")
-
 def cadastrar_livro():
-    titulo = input("Digite o título do livro: ")
-    autor = input("Digite o autor do livro: ")
-    exemplares = int(input("Digite o número de exemplares disponíveis: "))
+    titulo = titulo_entry.get()
+    autor = autor_entry.get()
+    exemplares = exemplares_entry.get()
     livro = Livro(titulo, autor, exemplares)
     catalogo.cadastrar_livro(livro)
 
 def validar_disponibilidade():
-    titulo = input("Digite o título do livro: ")
+    titulo = titulo_entry.get()
     catalogo.validar_disponibilidade(titulo)
 
 def pesquisar_livro():
-    chave = input("Digite o título ou autor do livro: ")
+    chave = chave_entry.get()
     catalogo.pesquisar_livro(chave)
 
-while True:
-    exibir_menu()
-    opcao = input("Escolha uma opção: ")
-    if opcao == "1":
-        cadastrar_livro()
-    elif opcao == "2":
-        validar_disponibilidade()
-    elif opcao == "3":
-        pesquisar_livro()
-    elif opcao == "4":
-        print("Saindo...")
-        break
-    else:
-        print("Opção inválida. Tente novamente.")
+def abrir_programa():
 
+    pass
+
+
+root = tk.Tk()
+root.title("Sistema de Biblioteca")
+
+
+titulo_label = tk.Label(root, text="Título:")
+titulo_label.grid(row=0, column=0, sticky="w")
+titulo_entry = tk.Entry(root)
+titulo_entry.grid(row=0, column=1)
+
+autor_label = tk.Label(root, text="Autor:")
+autor_label.grid(row=1, column=0, sticky="w")
+autor_entry = tk.Entry(root)
+autor_entry.grid(row=1, column=1)
+
+exemplares_label = tk.Label(root, text="Exemplares:")
+exemplares_label.grid(row=2, column=0, sticky="w")
+exemplares_entry = tk.Entry(root)
+exemplares_entry.grid(row=2, column=1)
+
+chave_label = tk.Label(root, text="Chave de busca:")
+chave_label.grid(row=3, column=0, sticky="w")
+chave_entry = tk.Entry(root)
+chave_entry.grid(row=3, column=1)
+
+cadastrar_button = tk.Button(root, text="Cadastrar livro", command=cadastrar_livro)
+cadastrar_button.grid(row=4, column=0, columnspan=2, pady=5)
+
+validar_button = tk.Button(root, text="Validar disponibilidade", command=validar_disponibilidade)
+validar_button.grid(row=5, column=0, columnspan=2, pady=5)
+
+pesquisar_button = tk.Button(root, text="Pesquisar livro", command=pesquisar_livro)
+pesquisar_button.grid(row=6, column=0, columnspan=2, pady=5)
+
+root.mainloop()
